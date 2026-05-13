@@ -62,6 +62,7 @@ def run_hpcqc_job(request: JobRequest, job_id: str, add_log: Callable[[str], Non
             "noise": request.noise,
             "optimizer_steps": request.optimizer_steps,
             "seed": request.seed,
+            "simulated_runtime_seconds": request.simulated_runtime_seconds,
         },
         "optimizer": {
             "best_gammas": optimization.gammas,
@@ -94,4 +95,3 @@ def run_hpcqc_job(request: JobRequest, job_id: str, add_log: Callable[[str], Non
             "approximation_ratio": approximation_ratio,
         },
     }
-

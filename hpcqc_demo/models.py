@@ -56,7 +56,14 @@ class JobRequest(BaseModel):
     priority: int = Field(5, ge=0, le=10)
     optimizer_steps: int = Field(16, ge=4, le=64)
     seed: int | None = Field(None, ge=0)
+    simulated_runtime_seconds: float = Field(0.0, ge=0.0, le=120.0)
     submitted_by: str = Field("streamlit-ui", min_length=1, max_length=80)
+
+
+class JobBatchRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    jobs: list[JobRequest] = Field(..., min_length=1, max_length=100)
 
 
 class JobRecord(BaseModel):
@@ -68,10 +75,14 @@ class JobRecord(BaseModel):
     created_at: str
     updated_at: str
     sequence: int
+    batch_id: str | None = None
+    queued_at: str | None = None
     started_at: str | None = None
     completed_at: str | None = None
+    machine_id: str | None = None
+    queue_wait_seconds: float | None = None
+    runtime_seconds: float | None = None
     logs: list[str] = Field(default_factory=list)
     result: dict[str, Any] | None = None
     error: str | None = None
     artifacts: dict[str, str] = Field(default_factory=dict)
-

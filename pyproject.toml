@@ -10,6 +10,7 @@ requires-python = ">=3.12"
 dependencies = [
   "flask",
   "streamlit",
+  "altair",
   "numpy",
   "pydantic",
   "requests",
@@ -21,4 +22,3 @@ test = ["pytest"]
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
-
